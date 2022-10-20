@@ -20,4 +20,10 @@ public class ArticleController {
 	public ArticleDto createArticle(ArticleDto articleDto) {
 		return articleService.articleRegister(articleDto);
 	}
+	
+	@RequestMapping("/articles/:slug")
+	@ResponseBody
+	public ArticleDto getArticle(String slug) {
+		return articleService.articleSearch(slug);
+	}
 }

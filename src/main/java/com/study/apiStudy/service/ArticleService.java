@@ -13,9 +13,11 @@ public class ArticleService implements IArticleService {
 
 	@Override
 	public ArticleDto articleRegister(ArticleDto articleDto) {
-		ArticleDto article = articleDao.articleInsert(articleDto);
-		
-		return article;
+		return articleDao.articleInsert(articleDto);
 	}
-	
+
+	@Override
+	public ArticleDto articleSearch(String slug) {
+		return articleDao.articleSelect(slug);
+	}
 }

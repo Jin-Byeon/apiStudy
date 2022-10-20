@@ -9,16 +9,15 @@ import com.study.apiStudy.dto.ArticleDto;
 
 @Repository
 public class ArticleDao implements IArticleDao {
-	private ArticleDto article;
 	private ArrayList<ArticleDto> articles;
 	
 	public ArticleDao() {
-		article = new ArticleDto();
 		articles = new ArrayList<ArticleDto>();
 	}
 
 	@Override
 	public ArticleDto articleInsert(ArticleDto articleDto) {
+		ArticleDto article = new ArticleDto();
 		Date date = new Date();
 		
 		article.setSlug(articleDto.getTitle().replace(" ", "-"));
@@ -32,6 +31,19 @@ public class ArticleDao implements IArticleDao {
 		article.setFavoritesCount(0);
 		
 		articles.add(article);
+		
+		return articles.get(articles.size() - 1);
+	}
+
+	@Override
+	public ArticleDto articleSelect(String slug) {
+		ArticleDto article = new ArticleDto();
+		
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getSlug().equals(slug)) {
+				article = articles.get(i);
+			}
+		}
 		
 		return article;
 	}
