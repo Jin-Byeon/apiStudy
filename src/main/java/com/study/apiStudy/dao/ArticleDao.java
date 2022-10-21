@@ -32,7 +32,7 @@ public class ArticleDao implements IArticleDao {
 		
 		articles.add(article);
 		
-		return articles.get(articles.size() - 1);
+		return article;
 	}
 
 	@Override
@@ -42,6 +42,29 @@ public class ArticleDao implements IArticleDao {
 		for (int i = 0; i < articles.size(); i++) {
 			if (articles.get(i).getSlug().equals(slug)) {
 				article = articles.get(i);
+			}
+		}
+		
+		return article;
+	}
+
+	@Override
+	public ArticleDto articleUpdate(String slug, ArticleDto articleDto) {
+		ArticleDto article = new ArticleDto();
+		Date date = new Date();
+
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getSlug().equals(slug)) {
+				article = articles.get(i);
+				if (articleDto.getTitle() != null) {
+					article.setSlug(articleDto.getTitle().replace(" ", "-"));
+					article.setTitle(articleDto.getTitle());
+				}
+				if (articleDto.getDescription() != null) article.setDescription(articleDto.getDescription());
+				if (articleDto.getBody() != null) article.setBody(articleDto.getBody());
+				article.setUpdatedAt(date);
+
+				articles.set(i, article);
 			}
 		}
 		

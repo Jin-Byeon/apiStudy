@@ -2,6 +2,7 @@ package com.study.apiStudy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +24,13 @@ public class ArticleController {
 	
 	@RequestMapping("/articles/:slug")
 	@ResponseBody
-	public ArticleDto getArticle(String slug) {
+	public ArticleDto readArticle(String slug) {
 		return articleService.articleSearch(slug);
+	}
+	
+	@RequestMapping(value = "/articles/:slug", method = RequestMethod.PUT)
+	@ResponseBody
+	public ArticleDto updateArticle(String slug, @RequestBody ArticleDto articleDto) {
+		return articleService.articleModify(slug, articleDto);
 	}
 }

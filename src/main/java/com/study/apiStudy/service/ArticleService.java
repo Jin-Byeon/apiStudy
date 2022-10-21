@@ -20,4 +20,9 @@ public class ArticleService implements IArticleService {
 	public ArticleDto articleSearch(String slug) {
 		return articleDao.articleSelect(slug);
 	}
+
+	@Override
+	public ArticleDto articleModify(String slug, ArticleDto articleDto) {
+		return articleDao.articleUpdate(slug, articleDto);
+	}
 }
