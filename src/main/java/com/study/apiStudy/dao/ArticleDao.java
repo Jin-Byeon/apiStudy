@@ -70,4 +70,15 @@ public class ArticleDao implements IArticleDao {
 		
 		return article;
 	}
+
+	@Override
+	public String articleDelete(String slug) {
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getSlug().equals(slug)) {
+				articles.remove(i);
+			}
+		}
+		
+		return "Success";
+	}
 }

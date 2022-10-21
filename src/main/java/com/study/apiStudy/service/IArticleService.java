@@ -6,4 +6,5 @@ public interface IArticleService {
 	ArticleDto articleRegister(ArticleDto articleDto);
 	ArticleDto articleSearch(String slug);
 	ArticleDto articleModify(String slug, ArticleDto articleDto);
+	String articleRemove(String slug);
 }

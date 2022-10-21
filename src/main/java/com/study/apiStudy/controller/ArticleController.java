@@ -33,4 +33,10 @@ public class ArticleController {
 	public ArticleDto updateArticle(String slug, @RequestBody ArticleDto articleDto) {
 		return articleService.articleModify(slug, articleDto);
 	}
+	
+	@RequestMapping(value = "/articles/:slug", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteArticle(String slug) {
+		return articleService.articleRemove(slug);
+	}
 }

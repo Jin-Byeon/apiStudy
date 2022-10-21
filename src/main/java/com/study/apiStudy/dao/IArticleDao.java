@@ -6,4 +6,5 @@ public interface IArticleDao {
 	ArticleDto articleInsert(ArticleDto articleDto);
 	ArticleDto articleSelect(String slug);
 	ArticleDto articleUpdate(String slug, ArticleDto articleDto);
+	String articleDelete(String slug);
 }
