@@ -18,6 +18,13 @@ public class ArticleDao implements IArticleDao {
 	@Override
 	public ArticleDto articleInsert(ArticleDto articleDto) {
 		ArticleDto article = new ArticleDto();
+		
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getTitle().equals(articleDto.getTitle())) {
+				return article;
+			}
+		}
+		
 		Date date = new Date();
 		
 		article.setSlug(articleDto.getTitle().replace(" ", "-"));
