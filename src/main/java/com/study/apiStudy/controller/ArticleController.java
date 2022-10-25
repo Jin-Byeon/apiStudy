@@ -1,5 +1,7 @@
 package com.study.apiStudy.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,20 +20,29 @@ public class ArticleController {
 	
 	@RequestMapping(value = "/articles", method = RequestMethod.POST)
 	@ResponseBody
-	public ArticleDto createArticle(ArticleDto articleDto) {
-		return articleService.articleRegister(articleDto);
+	public HashMap<String, ArticleDto> createArticle(ArticleDto articleDto) {
+		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
+		article.put("article", articleService.articleRegister(articleDto));
+		 
+		return article;
 	}
 	
 	@RequestMapping("/articles/:slug")
 	@ResponseBody
-	public ArticleDto readArticle(String slug) {
-		return articleService.articleSearch(slug);
+	public HashMap<String, ArticleDto> readArticle(String slug) {
+		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
+		article.put("article", articleService.articleSearch(slug));
+		 
+		return article;
 	}
 	
 	@RequestMapping(value = "/articles/:slug", method = RequestMethod.PUT)
 	@ResponseBody
-	public ArticleDto updateArticle(String slug, @RequestBody ArticleDto articleDto) {
-		return articleService.articleModify(slug, articleDto);
+	public HashMap<String, ArticleDto> updateArticle(String slug, @RequestBody ArticleDto articleDto) {
+		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
+		article.put("article", articleService.articleModify(slug, articleDto));
+		 
+		return article;
 	}
 	
 	@RequestMapping(value = "/articles/:slug", method = RequestMethod.DELETE)
