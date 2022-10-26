@@ -20,29 +20,32 @@ public class ArticleController {
 	
 	@RequestMapping(value = "/articles", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, ArticleDto> createArticle(ArticleDto articleDto) {
-		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
-		article.put("article", articleService.articleRegister(articleDto));
+	public HashMap<String, ArticleDto> createArticle(@RequestBody ArticleDto articleDto) {
+		HashMap<String, ArticleDto> result = new HashMap<String, ArticleDto>();
+		
+		result.put("article", articleService.articleRegister(articleDto));
 		 
-		return article;
+		return result;
 	}
 	
 	@RequestMapping("/articles/:slug")
 	@ResponseBody
-	public HashMap<String, ArticleDto> readArticle(String slug) {
-		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
-		article.put("article", articleService.articleSearch(slug));
+	public HashMap<String, ArticleDto> getArticle(String slug) {
+		HashMap<String, ArticleDto> result  = new HashMap<String, ArticleDto>();
+		
+		result.put("article", articleService.articleSearch(slug));
 		 
-		return article;
+		return result ;
 	}
 	
 	@RequestMapping(value = "/articles/:slug", method = RequestMethod.PUT)
 	@ResponseBody
 	public HashMap<String, ArticleDto> updateArticle(String slug, @RequestBody ArticleDto articleDto) {
-		HashMap<String, ArticleDto> article = new HashMap<String, ArticleDto>();
-		article.put("article", articleService.articleModify(slug, articleDto));
+		HashMap<String, ArticleDto> result  = new HashMap<String, ArticleDto>();
+		
+		result.put("article", articleService.articleModify(slug, articleDto));
 		 
-		return article;
+		return result ;
 	}
 	
 	@RequestMapping(value = "/articles/:slug", method = RequestMethod.DELETE)
