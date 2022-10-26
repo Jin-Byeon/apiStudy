@@ -48,4 +48,10 @@ public class CommentController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value = "/articles/:slug/comments/:id", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteComment(String slug, int id) {
+		return commentService.commentRemove(slug, id);
+	}
 }
