@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.apiStudy.dao.CommentDao;
 import com.study.apiStudy.dto.CommentDto;
+import com.study.apiStudy.dto.SingleComment;
 
 @Service
 public class CommentService implements ICommentService {
@@ -20,7 +21,7 @@ public class CommentService implements ICommentService {
 	}
 
 	@Override
-	public ArrayList<CommentDto> commentSearchAll(String slug) {
+	public ArrayList<SingleComment> commentSearchAll(String slug) {
 		return commentDao.commentSelectAll(slug);
 	}
 

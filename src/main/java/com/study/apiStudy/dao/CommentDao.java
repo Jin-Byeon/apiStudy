@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.stereotype.Repository;
 
 import com.study.apiStudy.dto.CommentDto;
+import com.study.apiStudy.dto.SingleComment;
 
 @Repository
 public class CommentDao implements ICommentDao {
@@ -39,12 +40,19 @@ public class CommentDao implements ICommentDao {
 	}
 
 	@Override
-	public ArrayList<CommentDto> commentSelectAll(String slug) {
-		ArrayList<CommentDto> multipleComments = new ArrayList<CommentDto>();
+	public ArrayList<SingleComment> commentSelectAll(String slug) {
+		ArrayList<SingleComment> multipleComments = new ArrayList<SingleComment>();
 		
 		for (int i = 0; i < comments.size(); i++) {
 			if (comments.get(i).getSlug().equals(slug)) {
-				multipleComments.add(comments.get(i));
+				SingleComment singleComment = new SingleComment();
+				
+				singleComment.setId(comments.get(i).getId());
+				singleComment.setCreatedAt(comments.get(i).getCreatedAt());
+				singleComment.setUpdatedAt(comments.get(i).getUpdatedAt());
+				singleComment.setBody(comments.get(i).getBody());
+				
+				multipleComments.add(singleComment);
 			}
 		}
 		

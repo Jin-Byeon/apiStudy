@@ -1,11 +1,13 @@
 package com.study.apiStudy.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.apiStudy.dto.CommentDto;
@@ -19,7 +21,7 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
-	@RequestMapping("/articles/:slug/comments")
+	@RequestMapping(value = "/articles/:slug/comments", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, SingleComment> addComment(String slug, @RequestBody CommentDto commentDto) {
 		HashMap<String, SingleComment> result = new HashMap<String, SingleComment>();
@@ -37,4 +39,13 @@ public class CommentController {
 		return result;
 	}
 	
+	@RequestMapping("/articles/:slug/comments")
+	@ResponseBody
+	public HashMap<String, ArrayList<SingleComment>> getComments(String slug) {
+		HashMap<String, ArrayList<SingleComment>> result = new HashMap<String, ArrayList<SingleComment>>();
+		
+		result.put("comments", commentService.commentSearchAll(slug));
+		
+		return result;
+	}
 }
