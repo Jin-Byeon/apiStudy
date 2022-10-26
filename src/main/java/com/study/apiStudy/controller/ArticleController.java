@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.apiStudy.dto.ArticleDto;
+import com.study.apiStudy.dto.CreateArticle;
+import com.study.apiStudy.dto.UpdateArticle;
 import com.study.apiStudy.service.ArticleService;
 
 @Controller
@@ -20,10 +22,10 @@ public class ArticleController {
 	
 	@RequestMapping(value = "/articles", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, ArticleDto> createArticle(@RequestBody ArticleDto articleDto) {
+	public HashMap<String, ArticleDto> createArticle(@RequestBody CreateArticle createArticle) {
 		HashMap<String, ArticleDto> result = new HashMap<String, ArticleDto>();
 		
-		result.put("article", articleService.articleRegister(articleDto));
+		result.put("article", articleService.articleRegister(createArticle.getArticle()));
 		 
 		return result;
 	}
@@ -40,10 +42,10 @@ public class ArticleController {
 	
 	@RequestMapping(value = "/articles/:slug", method = RequestMethod.PUT)
 	@ResponseBody
-	public HashMap<String, ArticleDto> updateArticle(String slug, @RequestBody ArticleDto articleDto) {
+	public HashMap<String, ArticleDto> updateArticle(String slug, @RequestBody UpdateArticle updateArticle) {
 		HashMap<String, ArticleDto> result  = new HashMap<String, ArticleDto>();
 		
-		result.put("article", articleService.articleModify(slug, articleDto));
+		result.put("article", articleService.articleModify(slug, updateArticle.getArticle()));
 		 
 		return result ;
 	}

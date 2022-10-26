@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.study.apiStudy.dto.AddComment;
 import com.study.apiStudy.dto.CommentDto;
 import com.study.apiStudy.dto.SingleComment;
 import com.study.apiStudy.service.CommentService;
@@ -23,11 +24,11 @@ public class CommentController {
 	
 	@RequestMapping(value = "/articles/:slug/comments", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, SingleComment> addComment(String slug, @RequestBody CommentDto commentDto) {
+	public HashMap<String, SingleComment> addComment(String slug, @RequestBody AddComment addComment) {
 		HashMap<String, SingleComment> result = new HashMap<String, SingleComment>();
 		SingleComment singleComment = new SingleComment();
 		
-		CommentDto comment = commentService.commentRegister(slug, commentDto);
+		CommentDto comment = commentService.commentRegister(slug, addComment.getComment());
 		
 		singleComment.setId(comment.getId());
 		singleComment.setCreatedAt(comment.getCreatedAt());
