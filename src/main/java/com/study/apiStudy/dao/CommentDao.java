@@ -1,5 +1,6 @@
 package com.study.apiStudy.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,6 +21,9 @@ public class CommentDao implements ICommentDao {
 	public CommentDto commentInsert(String slug, CommentDto commentDto) {
 		CommentDto comment = new CommentDto();
 		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		String stringDate = simpleDateFormat.format(date);
+		
 		int idCount = 1;
 		
 		for (int i = 0; i < comments.size(); i++) {
@@ -30,8 +34,8 @@ public class CommentDao implements ICommentDao {
 		
 		comment.setSlug(slug);
 		comment.setId(idCount);
-		comment.setCreatedAt(date);
-		comment.setUpdatedAt(date);
+		comment.setCreatedAt(stringDate);
+		comment.setUpdatedAt(stringDate);
 		comment.setBody(commentDto.getBody());
 		
 		comments.add(comment);

@@ -1,11 +1,9 @@
 package com.study.apiStudy.dto;
 
-import java.util.Date;
-
 public class SingleComment {
 	private int id;
-	private Date createdAt;
-	private Date updatedAt;
+	private String createdAt;
+	private String updatedAt;
 	private String body;
 	
 	public int getId() {
@@ -14,16 +12,16 @@ public class SingleComment {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public String getBody() {

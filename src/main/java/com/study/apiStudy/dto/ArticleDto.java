@@ -1,15 +1,13 @@
 package com.study.apiStudy.dto;
 
-import java.util.Date;
-
 public class ArticleDto {
 	private String slug;
 	private String title;
 	private String description;
 	private String body;
 	private String[] tagList;
-	private Date createdAt; 
-	private Date updatedAt;
+	private String createdAt; 
+	private String updatedAt;
 	private boolean favorited;
 	private int favoritesCount;
 	
@@ -43,16 +41,16 @@ public class ArticleDto {
 	public void setTagList(String[] tagList) {
 		this.tagList = tagList;
 	}
-	public Date getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public String getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public boolean isFavorited() {
