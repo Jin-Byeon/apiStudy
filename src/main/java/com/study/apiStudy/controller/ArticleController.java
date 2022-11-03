@@ -55,4 +55,24 @@ public class ArticleController {
 	public String deleteArticle(String slug) {
 		return articleService.articleRemove(slug);
 	}
+	
+	@RequestMapping(value = "/articles/:slug/favorite", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, ArticleDto> favorite(String slug) {
+		HashMap<String, ArticleDto> result = new HashMap<String, ArticleDto>();
+		
+		result.put("article", articleService.articleFavorite(slug));
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/articles/:slug/favorite", method = RequestMethod.DELETE)
+	@ResponseBody
+	public HashMap<String, ArticleDto> unfavorite(String slug) {
+		HashMap<String, ArticleDto> result = new HashMap<String, ArticleDto>();
+		
+		result.put("article", articleService.articleUnfavorite(slug));
+		
+		return result;
+	}
 }

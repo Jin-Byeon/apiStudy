@@ -7,4 +7,6 @@ public interface IArticleService {
 	ArticleDto articleSearch(String slug);
 	ArticleDto articleModify(String slug, ArticleDto articleDto);
 	String articleRemove(String slug);
+	ArticleDto articleFavorite(String slug);
+	ArticleDto articleUnfavorite(String slug);
 }

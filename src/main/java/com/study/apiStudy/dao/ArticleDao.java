@@ -93,4 +93,45 @@ public class ArticleDao implements IArticleDao {
 		
 		return "Success";
 	}
+
+	@Override
+	public ArticleDto articleFavorite(String slug) {
+		ArticleDto article = new ArticleDto();
+
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getSlug().equals(slug)) {
+				article = articles.get(i);
+				article.setFavorited(true);
+				article.setFavoritesCount(article.getFavoritesCount() + 1);
+			}
+			
+			articles.set(i, article);
+		}
+		
+		return article;
+	}
+
+	@Override
+	public ArticleDto articleUnfavorite(String slug) {
+		ArticleDto article = new ArticleDto();
+
+		for (int i = 0; i < articles.size(); i++) {
+			if (articles.get(i).getSlug().equals(slug)) {
+				article = articles.get(i);
+				
+				if (article.getFavoritesCount() == 0) {
+					return article;
+				} else if (article.getFavoritesCount() == 1) {
+					article.setFavorited(false);
+					article.setFavoritesCount(article.getFavoritesCount() - 1);
+				} else if (article.getFavoritesCount() > 1) {
+					article.setFavoritesCount(article.getFavoritesCount() - 1);
+				}
+			}
+			
+			articles.set(i, article);
+		}
+		
+		return article;
+	}
 }

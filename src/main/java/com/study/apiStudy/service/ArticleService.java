@@ -30,4 +30,14 @@ public class ArticleService implements IArticleService {
 	public String articleRemove(String slug) {
 		return articleDao.articleDelete(slug);
 	}
+
+	@Override
+	public ArticleDto articleFavorite(String slug) {
+		return articleDao.articleFavorite(slug);
+	}
+
+	@Override
+	public ArticleDto articleUnfavorite(String slug) {
+		return articleDao.articleUnfavorite(slug);
+	}
 }
