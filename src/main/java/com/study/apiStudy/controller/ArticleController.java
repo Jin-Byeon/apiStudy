@@ -75,4 +75,14 @@ public class ArticleController {
 		
 		return result;
 	}
+	
+	@RequestMapping("/tags")
+	@ResponseBody
+	public HashMap<String, String[]> getTags() {
+		HashMap<String, String[]> result = new HashMap<String, String[]>();
+		
+		result.put("tags", articleService.tagSearchAll());
+		
+		return result;
+	}
 }

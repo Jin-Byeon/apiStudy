@@ -9,4 +9,5 @@ public interface IArticleService {
 	String articleRemove(String slug);
 	ArticleDto articleFavorite(String slug);
 	ArticleDto articleUnfavorite(String slug);
+	String[] tagSearchAll();
 }

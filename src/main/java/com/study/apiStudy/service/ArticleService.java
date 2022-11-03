@@ -40,4 +40,9 @@ public class ArticleService implements IArticleService {
 	public ArticleDto articleUnfavorite(String slug) {
 		return articleDao.articleUnfavorite(slug);
 	}
+
+	@Override
+	public String[] tagSearchAll() {
+		return articleDao.tagSelectAll();
+	}
 }

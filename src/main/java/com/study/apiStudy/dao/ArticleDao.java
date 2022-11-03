@@ -11,6 +11,7 @@ import com.study.apiStudy.dto.ArticleDto;
 @Repository
 public class ArticleDao implements IArticleDao {
 	private ArrayList<ArticleDto> articles;
+	private String[] tags = {"reactjs", "angularjs"};
 	
 	public ArticleDao() {
 		articles = new ArrayList<ArticleDto>();
@@ -133,5 +134,10 @@ public class ArticleDao implements IArticleDao {
 		}
 		
 		return article;
+	}
+
+	@Override
+	public String[] tagSelectAll() {
+		return tags;
 	}
 }

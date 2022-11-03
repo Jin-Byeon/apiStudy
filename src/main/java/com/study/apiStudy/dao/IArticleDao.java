@@ -9,4 +9,5 @@ public interface IArticleDao {
 	String articleDelete(String slug);
 	ArticleDto articleFavorite(String slug);
 	ArticleDto articleUnfavorite(String slug);
+	String[] tagSelectAll();
 }
