@@ -3,6 +3,8 @@ package com.study.apiStudy.dao;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,11 @@ public class ArticleDao implements IArticleDao {
 	
 	public ArticleDao() {
 		articles = new ArrayList<ArticleDto>();
+	}
+
+	@Override
+	public List<Object> articleFeed(int limit, int offset) {
+		return articles.stream().sorted().collect(Collectors.toList());
 	}
 
 	@Override
@@ -31,7 +38,7 @@ public class ArticleDao implements IArticleDao {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		String stringDate = simpleDateFormat.format(date);
 		
-		article.setSlug(articleDto.getTitle().replace(" ", "-"));
+		article.setSlug(articleDto.getTitle().replace(' ', '-'));
 		article.setTitle(articleDto.getTitle());
 		article.setDescription(articleDto.getDescription());
 		article.setBody(articleDto.getBody());
@@ -68,9 +75,13 @@ public class ArticleDao implements IArticleDao {
 
 		for (int i = 0; i < articles.size(); i++) {
 			if (articles.get(i).getSlug().equals(slug)) {
+				if (articles.get(i).getTitle().equals(slug.replace('-', ' '))) {
+					return article;
+				}
+				
 				article = articles.get(i);
 				if (articleDto.getTitle() != null) {
-					article.setSlug(articleDto.getTitle().replace(" ", "-"));
+					article.setSlug(articleDto.getTitle().replace(' ', '-'));
 					article.setTitle(articleDto.getTitle());
 				}
 				if (articleDto.getDescription() != null) article.setDescription(articleDto.getDescription());

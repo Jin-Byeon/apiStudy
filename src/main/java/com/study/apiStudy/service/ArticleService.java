@@ -1,5 +1,7 @@
 package com.study.apiStudy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,11 @@ import com.study.apiStudy.dto.ArticleDto;
 public class ArticleService implements IArticleService {
 	@Autowired
 	ArticleDao articleDao;
+	
+	@Override
+	public List<Object> articleFeed(int limit, int offset) {
+		return articleDao.articleFeed(limit, offset);
+	}
 
 	@Override
 	public ArticleDto articleRegister(ArticleDto articleDto) {

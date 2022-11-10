@@ -1,8 +1,11 @@
 package com.study.apiStudy.service;
 
+import java.util.List;
+
 import com.study.apiStudy.dto.ArticleDto;
 
 public interface IArticleService {
+	List<Object> articleFeed(int limit, int offset);
 	ArticleDto articleRegister(ArticleDto articleDto);
 	ArticleDto articleSearch(String slug);
 	ArticleDto articleModify(String slug, ArticleDto articleDto);

@@ -1,12 +1,14 @@
 package com.study.apiStudy.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.study.apiStudy.dto.ArticleDto;
@@ -19,6 +21,16 @@ import com.study.apiStudy.service.ArticleService;
 public class ArticleController {
 	@Autowired
 	ArticleService articleService;
+	
+	@RequestMapping("/articles/feed")
+	@ResponseBody
+	public HashMap<String, List<Object>> feedArticles(@RequestParam(defaultValue = "20") int limit, @RequestParam(defaultValue = "0") int offset) {
+		HashMap<String, List<Object>> result = new HashMap<String, List<Object>>();
+
+		result.put("articles", articleService.articleFeed(limit, offset));
+		
+		return result;
+	}
 	
 	@RequestMapping(value = "/articles", method = RequestMethod.POST)
 	@ResponseBody
