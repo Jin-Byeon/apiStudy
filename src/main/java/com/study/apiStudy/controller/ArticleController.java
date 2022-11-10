@@ -24,8 +24,8 @@ public class ArticleController {
 	
 	@RequestMapping("/articles/feed")
 	@ResponseBody
-	public HashMap<String, List<Object>> feedArticles(@RequestParam(defaultValue = "20") int limit, @RequestParam(defaultValue = "0") int offset) {
-		HashMap<String, List<Object>> result = new HashMap<String, List<Object>>();
+	public HashMap<String, List<ArticleDto>> feedArticles(@RequestParam(defaultValue = "20") int limit, @RequestParam(defaultValue = "0") int offset) {
+		HashMap<String, List<ArticleDto>> result = new HashMap<String, List<ArticleDto>>();
 
 		result.put("articles", articleService.articleFeed(limit, offset));
 		

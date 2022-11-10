@@ -14,7 +14,7 @@ public class ArticleService implements IArticleService {
 	ArticleDao articleDao;
 	
 	@Override
-	public List<Object> articleFeed(int limit, int offset) {
+	public List<ArticleDto> articleFeed(int limit, int offset) {
 		return articleDao.articleFeed(limit, offset);
 	}
 

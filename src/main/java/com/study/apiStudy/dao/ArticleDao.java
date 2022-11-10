@@ -2,9 +2,9 @@ package com.study.apiStudy.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
@@ -14,14 +14,34 @@ import com.study.apiStudy.dto.ArticleDto;
 public class ArticleDao implements IArticleDao {
 	private ArrayList<ArticleDto> articles;
 	private String[] tags = {"reactjs", "angularjs"};
+	SimpleDateFormat simpleDateFormat;
 	
 	public ArticleDao() {
 		articles = new ArrayList<ArticleDto>();
+		simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 	}
 
 	@Override
-	public List<Object> articleFeed(int limit, int offset) {
-		return articles.stream().sorted().collect(Collectors.toList());
+	public List<ArticleDto> articleFeed(int limit, int offset) {
+		ArrayList<ArticleDto> multipleArticles = articles;
+		
+//		for (int i = 0; i < articles.size(); i++) {
+//			Date BeforeCreateDate = simpleDateFormat.parse(articles.get(i).getCreatedAt());
+//			Date AfterCreateDate = simpleDateFormat.parse(articles.get(i).getCreatedAt());
+//			
+//			if (BeforeCreateDate.after(AfterCreateDate)) {
+//				multipleArticles.add(articles.get(i));
+//			}
+//		}
+		Collections.reverse(multipleArticles);
+		
+		if (articles.size() <= offset) {
+			return multipleArticles.subList(articles.size() , articles.size());
+		} else if (articles.size() <= offset + limit) {
+			return multipleArticles.subList(offset, articles.size());
+		} else {
+			return multipleArticles.subList(offset, offset + limit);
+		}
 	}
 
 	@Override
@@ -35,7 +55,6 @@ public class ArticleDao implements IArticleDao {
 		}
 		
 		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		String stringDate = simpleDateFormat.format(date);
 		
 		article.setSlug(articleDto.getTitle().replace(' ', '-'));
@@ -70,7 +89,6 @@ public class ArticleDao implements IArticleDao {
 	public ArticleDto articleUpdate(String slug, ArticleDto articleDto) {
 		ArticleDto article = new ArticleDto();
 		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 		String stringDate = simpleDateFormat.format(date);
 
 		for (int i = 0; i < articles.size(); i++) {
