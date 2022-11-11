@@ -14,6 +14,11 @@ public class ArticleService implements IArticleService {
 	ArticleDao articleDao;
 	
 	@Override
+	public List<ArticleDto> articleList(String tag, int limit, int offset) {
+		return articleDao.articleList(tag, limit, offset);
+	}
+
+	@Override
 	public List<ArticleDto> articleFeed(int limit, int offset) {
 		return articleDao.articleFeed(limit, offset);
 	}

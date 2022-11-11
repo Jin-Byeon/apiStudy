@@ -22,23 +22,42 @@ public class ArticleDao implements IArticleDao {
 	}
 
 	@Override
-	public List<ArticleDto> articleFeed(int limit, int offset) {
-		ArrayList<ArticleDto> multipleArticles = articles;
+	public List<ArticleDto> articleList(String tag, int limit, int offset) {
+		List<ArticleDto> multipleArticles = new ArrayList<ArticleDto>();
+
+		for (int i = 0; i < articles.size(); i++) {
+			for (int j = 0; j < articles.get(i).getTagList().length; j++) {
+				if (articles.get(i).getTagList()[j].equals(tag)) {
+					multipleArticles.add(articles.get(i));
+				}
+			}
+		}
 		
-//		for (int i = 0; i < articles.size(); i++) {
-//			Date BeforeCreateDate = simpleDateFormat.parse(articles.get(i).getCreatedAt());
-//			Date AfterCreateDate = simpleDateFormat.parse(articles.get(i).getCreatedAt());
-//			
-//			if (BeforeCreateDate.after(AfterCreateDate)) {
-//				multipleArticles.add(articles.get(i));
-//			}
-//		}
 		Collections.reverse(multipleArticles);
 		
-		if (articles.size() <= offset) {
-			return multipleArticles.subList(articles.size() , articles.size());
-		} else if (articles.size() <= offset + limit) {
-			return multipleArticles.subList(offset, articles.size());
+		if (multipleArticles.size() <= offset) {
+			return multipleArticles.subList(multipleArticles.size() , multipleArticles.size());
+		} else if (multipleArticles.size() <= offset + limit) {
+			return multipleArticles.subList(offset, multipleArticles.size());
+		} else {
+			return multipleArticles.subList(offset, offset + limit);
+		}
+	}
+
+	@Override
+	public List<ArticleDto> articleFeed(int limit, int offset) {
+		ArrayList<ArticleDto> multipleArticles = new ArrayList<ArticleDto>();
+		
+		for (int i = 0; i < articles.size(); i++) {
+			multipleArticles.add(articles.get(i));
+		}
+		
+		Collections.reverse(multipleArticles);
+		
+		if (multipleArticles.size() <= offset) {
+			return multipleArticles.subList(multipleArticles.size() , multipleArticles.size());
+		} else if (multipleArticles.size() <= offset + limit) {
+			return multipleArticles.subList(offset, multipleArticles.size());
 		} else {
 			return multipleArticles.subList(offset, offset + limit);
 		}
